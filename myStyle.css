@@ -1,0 +1,20 @@
+﻿.myGrid{
+    display:flex;
+    flex-wrap:wrap;
+    width:140px;
+    height:120px;
+    border: 1px solid;
+}
+.myGrid div{
+    width:20px;
+    height:20px;
+}
+
+.player1{
+    border-radius:10px;
+    background-color:chartreuse;
+}
+.player2 {
+    border-radius: 10px;
+    background-color:mediumvioletred;
+}
