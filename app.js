@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const squares = document.querySelectorAll('.myGrid div');
     const result = document.querySelector('#res');
     let curr_player = 1;
+    let gameOver = 0;
 
     const validArrays = [
         [0, 1, 2, 3],
@@ -82,7 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let i = 0; i < validArrays.length; i++) {
 
-            const mySquares = [squares[validArrays[i][0]], squares[validArrays[i][1]], squares[validArrays[i][2]], squares[validArrays[i][3]]];
+            const mySquares = [];
+
+            for (j = 0; j < 4; j++) {
+               
+                    mySquares.push(squares[validArrays[i][j]]);
+            }
+           
             let checkP1 = mySquares.every(myFunction1);
             let checkP2 = mySquares.every(myFunction2);
 
@@ -100,16 +107,31 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (checkP1) {
                 result.innerHTML = 'Player 1 Wins';
+                gameOver = 1
             }
             else if (checkP2) {
                 result.innerHTML = 'Player 2 Wins';
+                gameOver = 1
+            }
+
+
+            if (gameOver) {
+
+                for (let j = 0; j < squares.length; j++) {
+                    squares[j].classList.remove('player1');
+                    squares[j].classList.remove('player2');
+                }
+                
             }
         }
+
+       
     }
 
     for (let j = 0; j < squares.length; j++) {
 
         squares[j].onclick = () => {
+
             if (!squares[j].classList.contains('taken') && squares[j + 7].classList.contains('taken')) {
 
                 if (curr_player == 1) {
@@ -129,10 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('currPlayer').innerHTML = curr_player;
 
                 }
-            } else {
-                alert("can't go here");
-            }
-                
+            } else alert('cant go here')
+           
             checkBoard();
         }
     }
